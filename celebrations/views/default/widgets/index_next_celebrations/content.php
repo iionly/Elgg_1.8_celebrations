@@ -1,6 +1,6 @@
 <?php
 /**
- * Elgg Celebrations plugin 1.8.0
+ * Elgg Celebrations plugin
  *
  * Index page Next Celebrations widget for Widget Manager plugin
  *
@@ -28,7 +28,7 @@ if (!$show_today) {
 }
 
 //draw celebrations
-if ($row_celebrations) {
+if (!empty($row_celebrations)) {
     print '<table width="100%">';
 
     foreach($row_celebrations as $key => $val) {

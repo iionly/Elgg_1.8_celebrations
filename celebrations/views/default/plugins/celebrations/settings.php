@@ -1,6 +1,6 @@
 <?php
 /**
- * Celebrations 1.8.0 - Admin settings
+ * Celebrations plugin - Admin settings
  *
  * @package Celebrations
  * @author Fernando Graells

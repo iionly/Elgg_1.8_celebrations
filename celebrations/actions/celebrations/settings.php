@@ -19,10 +19,12 @@ $site_guid = elgg_get_site_entity()->getGUID();
 // Params array (text boxes and drop downs)
 $params = get_input('params');
 $result = false;
-foreach ($params as $k => $v) {
-    if (!elgg_set_plugin_setting($k, $v, 'celebrations')) {
-        register_error(sprintf(elgg_echo('plugins:settings:save:fail'), 'celebrations'));
-        forward($_SERVER['HTTP_REFERER']);
+if(!empty($params)) {
+    foreach ($params as $k => $v) {
+        if (!elgg_set_plugin_setting($k, $v, 'celebrations')) {
+            register_error(sprintf(elgg_echo('plugins:settings:save:fail'), 'celebrations'));
+            forward($_SERVER['HTTP_REFERER']);
+        }
     }
 }
 

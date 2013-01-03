@@ -36,9 +36,11 @@
 
     $filteroptions = array();
     $filteroptions = array('0' => elgg_echo('celebrations:option_all'), '-1' => elgg_echo('celebrations:option_friends'));
-    foreach ($mygroups as $mygroup) {
-        $mygroup_guid = $mygroup['guid'];
-        $filteroptions[$mygroup_guid] = $mygroup['name'];
+    if (!empty($mygroups)) {
+        foreach ($mygroups as $mygroup) {
+            $mygroup_guid = $mygroup['guid'];
+            $filteroptions[$mygroup_guid] = $mygroup['name'];
+        }
     }
     echo elgg_view('input/dropdown',array('name' => $name, 'options_values' => $filteroptions, 'value' => $vars['filterid'], 'js' => $vars['js']));
 

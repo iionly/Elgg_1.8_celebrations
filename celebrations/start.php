@@ -94,7 +94,7 @@ function show_next_celebrations() {
         $celebrations = user_celebrations($nextdaysCelebrations, 'next', 0);
 
         //draw celebrations
-        if ($celebrations) {
+        if (!empty($celebrations)) {
             foreach($celebrations as $key => $val) {
                 if ($val['rest'] == 0) {
                     $days = elgg_echo('next_celebrations:today');

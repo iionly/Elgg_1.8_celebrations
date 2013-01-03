@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Elgg Celebrations Plugin 1.8.0 date input
+ * Elgg Celebrations Plugin date input
  * Displays a date selection
  * Adapted from plugin "profile age and gender"
  * @package celebrations

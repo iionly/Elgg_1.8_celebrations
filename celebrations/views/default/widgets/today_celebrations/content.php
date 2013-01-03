@@ -1,6 +1,6 @@
 <?php
 /**
- * Celebrations Plugin 1.8.0
+ * Celebrations Plugin
  *
  * @package celebrations, widget today celebrations
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
@@ -24,7 +24,7 @@ print '<div class="user_settings"><p style="text-align:right">'.elgg_echo('today
 $row_celebrations = user_celebrations(0,'next', $filterid);
 
 // list of celebrations
-if ($row_celebrations){
+if (!empty($row_celebrations)) {
     print '<table width="100%">';
 
     foreach($row_celebrations as $key => $val) {

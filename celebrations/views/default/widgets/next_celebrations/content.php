@@ -1,6 +1,6 @@
 <?php
 /**
- * Elgg Celebrations plugin 1.8.0
+ * Elgg Celebrations plugin
  *
  * @package celebrations, widget next celebrations
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
@@ -35,7 +35,7 @@ if (!$show_today) {
 }
 
 //draw celebrations
-if ($row_celebrations) {
+if (!empty($row_celebrations)) {
     print '<table width="100%">';
 
     foreach($row_celebrations as $key => $val) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Celebrations Plugin 1.8.0
+ * Celebrations Plugin
  *
  * Index page Todays Celebrations widget for Widget Manager plugin
  *
@@ -17,7 +17,7 @@ print '<div class="user_settings"><p style="text-align:right">'.elgg_echo('today
 $row_celebrations = user_celebrations(0,'next', $filterid);
 
 // list of celebrations
-if ($row_celebrations){
+if (!empty($row_celebrations)) {
     print '<table width="100%">';
 
     foreach($row_celebrations as $key => $val) {

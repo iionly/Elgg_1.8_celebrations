@@ -1,6 +1,6 @@
 Celebrations plugin for Elgg 1.8
-Latest Version: 1.8.0
-Released: 2012-12-30
+Latest Version: 1.8.1
+Released: 2013-01-03
 Contact: iionly@gmx.de
 License: GNU General Public License version 2
 Copyright: (c) iionly 2012, (C) Fernando Graells 2009-2012
@@ -41,7 +41,11 @@ If the Widget Manager plugin is enabled - and the Widget Manager plugin is confi
 
 Changelog:
 
-Changes for release 1.8 (by iionly)
+Changes for release 1.8.1 (by iionly)
+
+- check if arrays of foreach loops are populated prior loop execution to prevent php warnings added to error log.
+
+Changes for release 1.8.0 (by iionly)
 
 - updated for Elgg 1.8
 - code cleanup

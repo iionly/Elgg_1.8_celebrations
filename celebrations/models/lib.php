@@ -122,21 +122,24 @@ function user_celebrations($num, $checkdaystype, $filter) {
         }
     }
 
-    foreach($users as $allusers) {
-        $user = get_user($allusers->guid);
-        $fullname = htmlentities($user->name, ENT_QUOTES, 'UTF-8') . " " . $user->lastname . " " . $user->secondlastname;
-
-        foreach($celebrationfields as $key => $valtype) {
-            $celebrationday = $user->$key;
-            $key = mb_substr($key, strlen($prefix), strlen($key));
-            if (($valtype == 'day_anniversary') && ($rest = checknextfewdays($celebrationday, 0, $num, $checkdaystype))) {
-                $rest = $rest-1;
-                $row[] = array('name' => $user->name, 'fullname' => $fullname, 'id' => $user->guid, 'type' => $key, 'date' => $celebrationday, 'url' => $user->getURL(), 'icon' => $user->getIconURL('topbar'), 'format' => $valtype, 'rest' => $rest);
-            } elseif (($valtype == 'yearly') && ($rest = checknextfewdays($celebrationday, 1, $num, $checkdaystype))) {
-                $rest = $rest-1;
-                list($dia, $mes) = explode("-", $celebrationday);
-                $feastday = strtotime(date("Y").'/'.$mes.'/'.$dia);
-                $row[] = array('name' => $user->name, 'fullname' => $fullname, 'id' => $user->guid, 'type' => $key, 'date' => $feastday, 'url' => $user->getURL(), 'icon' => $user->getIconURL('topbar'), 'format' => $valtype, 'rest' => $rest);
+    if(!empty($users)) {
+        foreach($users as $allusers) {
+            $user = get_user($allusers->guid);
+            $fullname = htmlentities($user->name, ENT_QUOTES, 'UTF-8') . " " . $user->lastname . " " . $user->secondlastname;
+            if(!empty($celebrationfields)) {
+                foreach($celebrationfields as $key => $valtype) {
+                    $celebrationday = $user->$key;
+                    $key = mb_substr($key, strlen($prefix), strlen($key));
+                    if (($valtype == 'day_anniversary') && ($rest = checknextfewdays($celebrationday, 0, $num, $checkdaystype))) {
+                        $rest = $rest-1;
+                        $row[] = array('name' => $user->name, 'fullname' => $fullname, 'id' => $user->guid, 'type' => $key, 'date' => $celebrationday, 'url' => $user->getURL(), 'icon' => $user->getIconURL('topbar'), 'format' => $valtype, 'rest' => $rest);
+                    } elseif (($valtype == 'yearly') && ($rest = checknextfewdays($celebrationday, 1, $num, $checkdaystype))) {
+                        $rest = $rest-1;
+                        list($dia, $mes) = explode("-", $celebrationday);
+                        $feastday = strtotime(date("Y").'/'.$mes.'/'.$dia);
+                        $row[] = array('name' => $user->name, 'fullname' => $fullname, 'id' => $user->guid, 'type' => $key, 'date' => $feastday, 'url' => $user->getURL(), 'icon' => $user->getIconURL('topbar'), 'format' => $valtype, 'rest' => $rest);
+                    }
+                }
             }
         }
     }
@@ -155,9 +158,11 @@ function filterlist($user_guid) {
     }
     $filteroptions = array();
     $filteroptions = array('0' => elgg_echo('celebrations:option_all'), '-1' => elgg_echo('celebrations:option_friends'));
-    foreach ($mygroups as $mygroup) {
-        $mygroup_guid = $mygroup['guid'];
-        $filteroptions[$mygroup_guid] = $mygroup['name'];
+    if(!empty($mygroups)) {
+        foreach ($mygroups as $mygroup) {
+            $mygroup_guid = $mygroup['guid'];
+            $filteroptions[$mygroup_guid] = $mygroup['name'];
+        }
     }
 
     return $filteroptions;
