@@ -5,11 +5,11 @@
  * @package celebrations, widget next celebrations
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Fernando Graells
- * @copyright Fernando Graells 2009
+ * @copyright Fernando Graells 2009-2013
  * @link
  *
  * for Elgg 1.8 by iionly
- * @copyright iionly 2012
+ * @copyright iionly 2012-2013
  * iionly@gmx.de
  */
 
@@ -44,10 +44,10 @@ if (!empty($row_celebrations)) {
             echo "<tr bgcolor=\"#{$even_odd}\">";
 
             if ($val['rest'] == 0) {
-                if (($val['type'] == 'dieday') || ($val['id'] == elgg_get_logged_in_user_entity()->guid)) {
+                if (($val['type'] == 'dieday') || ($val['id'] == elgg_get_logged_in_user_guid())) {
                     $sendcelebrationsmessage = '';
                 } else {
-                     $sendcelebrationsmessage = '<a class="privatemessages" href="'.$CONFIG->wwwroot.'messages/compose?send_to='.$val['id'].'" >&nbsp;</a>';
+                     $sendcelebrationsmessage = '<a class="privatemessages" href="'.elgg_get_site_url().'messages/compose?send_to='.$val['id'].'" >&nbsp;</a>';
                 }
                 $daysleftshow = elgg_echo('next_celebrations:today');
             } else if ($val['rest'] == 1) {

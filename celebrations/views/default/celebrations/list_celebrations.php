@@ -3,12 +3,11 @@
 
 <?php
 
-    global $CONFIG;
-
     $filterid = $vars['filterid'];
+    $month = $vars['month'];
 
     // checks for users celebrating something today
-    $row = user_celebrations(1, 'month', $filterid);
+    $row = user_celebrations(1, 'month', $filterid, $month);
 
     // start the draw of celebrations
     $row2 = array();
@@ -51,10 +50,10 @@
                 }
 
                 if (($celebrations_month == $current_month) && ($celebrations_day == $current_day)) {
-                    if (($val['type'] == 'dieday') || ($val['id'] == elgg_get_logged_in_user_entity()->guid)) {
+                    if (($val['type'] == 'dieday') || ($val['id'] == elgg_get_logged_in_user_guid())) {
                         echo "<td>&nbsp;</td>";
                     } else {
-                        $sendcelebrationsmessage = '<a class="privatemessages" href="'.$CONFIG->wwwroot.'messages/compose?send_to='.$val['id'].'" >&nbsp;</a>';
+                        $sendcelebrationsmessage = '<a class="privatemessages" href="'.elgg_get_site_url().'messages/compose?send_to='.$val['id'].'" >&nbsp;</a>';
                         echo '<td>'.$sendcelebrationsmessage.'</td>';
                     }
                 }

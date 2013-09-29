@@ -6,43 +6,33 @@
  * @package Celebrations
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Fernando Graells - ferg
- * @copyright Fernando Graells 2009
+ * @copyright Fernando Graells 2009-2013
  *
  * for Elgg 1.8 by iionly
- * @copyright iionly 2012
+ * @copyright iionly 2012-2013
  * iionly@gmx.de
  */
 
-function celebrations_init() {
-    global $CONFIG;
+elgg_register_event_handler('init', 'system', 'celebrations_init');
 
-    elgg_register_library('celebrations_lib', elgg_get_plugins_path() . 'celebrations/models/lib.php');
+function celebrations_init() {
+
+    elgg_register_library('celebrations_lib', elgg_get_plugins_path() . 'celebrations/lib/celebrations_lib.php');
     elgg_load_library('celebrations_lib');
 
     if (elgg_get_plugin_setting("ViewReminder", "celebrations") == 'yes') {
         elgg_register_event_handler('login', 'user', 'show_next_celebrations');
     }
 
-    if (get_input('filterid')) {
-        $filterid = get_input('filterid');
-    } else {
-        $filterid = 0;
-    }
-
     elgg_register_plugin_hook_handler('profile:fields', 'profile', 'celebrations_profile_fields_plugin_handler');
 
-    elgg_register_menu_item('site', array('name' => elgg_echo('celebrations:shorttitle'), 'text' => elgg_echo('celebrations:shorttitle'), 'href' => $CONFIG->wwwroot . "mod/celebrations"));
+    elgg_register_menu_item('site', array('name' => elgg_echo('celebrations:shorttitle'), 'text' => elgg_echo('celebrations:shorttitle'), 'href' => "celebrations/celebrations"));
 
     // Extend system CSS
     elgg_extend_view('css/elgg', 'celebrations/css');
 
-    elgg_extend_view('celebrations/list_celebrations', 'celebrations/javascript');
-
-
     // Register a page handler, so we can have nice URLs
     elgg_register_page_handler('celebrations','celebrations_page_handler');
-
-    register_translations($CONFIG->pluginspath . "celebrations/languages/");
 
     //add widgets
     elgg_register_widget_type('today_celebrations',elgg_echo("today_celebrations:title"),elgg_echo("today_celebrations:description"));
@@ -69,16 +59,28 @@ function celebrations_init() {
 }
 
 function celebrations_page_handler($page) {
-    global $CONFIG;
+    if (!isset($page[0])) {
+        return false;
+    }
 
-    include($CONFIG->pluginspath . "celebrations/index.php");
+    switch ($page[0]) {
+        case "celebrations":
+            if (isset($page[1])) {
+                set_input('month', $page[1]);
+            }
+            if (isset($page[2])) {
+                set_input('filterid', $page[2]);
+            }
+            require elgg_get_plugins_path() . "celebrations/pages/celebrations.php";
+            break;
+        default:
+            return false;
+    }
 
     return true;
 }
 
 function show_next_celebrations() {
-
-    global $CONFIG;
 
     $ViewReminder = elgg_get_plugin_setting("ViewReminder","celebrations");
     if(!$ViewReminder) {
@@ -138,5 +140,3 @@ function celebrations_profile_fields_plugin_handler($hook, $type, $return_value,
 
     return $return_value;
 }
-
-elgg_register_event_handler('init', 'system', 'celebrations_init');

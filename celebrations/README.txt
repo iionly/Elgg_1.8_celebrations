@@ -1,9 +1,9 @@
 Celebrations plugin for Elgg 1.8
-Latest Version: 1.8.1
-Released: 2013-01-03
+Latest Version: 1.8.2
+Released: 2013-09-28
 Contact: iionly@gmx.de
 License: GNU General Public License version 2
-Copyright: (c) iionly 2012, (C) Fernando Graells 2009-2012
+Copyright: (c) iionly 2012-2013, (C) Fernando Graells 2009-2013
 
 
 
@@ -40,6 +40,13 @@ If the Widget Manager plugin is enabled - and the Widget Manager plugin is confi
 
 
 Changelog:
+
+Changes for release 1.8.2 (by iionly)
+
+- code cleanup,
+- fixed: showing date in format selected in Celebrations plugin settings on Celebrations listing page, in profile pages info section and widgets,
+- fixed: allow for translations of month names via language file and also use these translations then,
+- fixed: user filter (all, friends, members of specific group) to work as intended on Celebrations listing page.
 
 Changes for release 1.8.1 (by iionly)
 

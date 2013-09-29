@@ -4,44 +4,46 @@
  *
  * @package Celebrations
  * @author Fernando Graells
- * @copyright Fernando Graells 2009
+ * @copyright Fernando Graells 2009-2013
  * @link
  *
- * Elgg 1.8 version by iionly (iionly@gmx.de)
+ * for Elgg 1.8 by iionly
+ * @copyright iionly 2012-2013
+ * iionly@gmx.de
  *
  */
 
 $plugin = elgg_get_plugin_from_id('celebrations');
 
-if (!(elgg_get_plugin_setting('replaceage'))) {
-    elgg_set_plugin_setting('replaceage', 'no');
+if (!(elgg_get_plugin_setting('replaceage', 'celebrations'))) {
+    elgg_set_plugin_setting('replaceage', 'no', 'celebrations');
 }
-if (!(elgg_get_plugin_setting('ViewReminder'))) {
-    elgg_set_plugin_setting('ViewReminder', 'no');
+if (!(elgg_get_plugin_setting('ViewReminder', 'celebrations'))) {
+    elgg_set_plugin_setting('ViewReminder', 'no', 'celebrations');
 }
-if (!(elgg_get_plugin_setting('nextdaysCelebrations'))) {
-    elgg_set_plugin_setting('nextdaysCelebrations', '7');
+if (!(elgg_get_plugin_setting('nextdaysCelebrations', 'celebrations'))) {
+    elgg_set_plugin_setting('nextdaysCelebrations', '7', 'celebrations');
 }
-if (!(elgg_get_plugin_setting('date_type'))) {
-    elgg_set_plugin_setting('date_type', 1);
+if (!(elgg_get_plugin_setting('date_type', 'celebrations'))) {
+    elgg_set_plugin_setting('date_type', 1, 'celebrations');
 }
-if (!(elgg_get_plugin_setting('lastname_field'))) {
-    elgg_set_plugin_setting('lastname_field', 'no');
+if (!(elgg_get_plugin_setting('lastname_field', 'celebrations'))) {
+    elgg_set_plugin_setting('lastname_field', 'no', 'celebrations');
 }
-if (!(elgg_get_plugin_setting('secondlastname_field'))) {
-    elgg_set_plugin_setting('secondlastname_field', 'no');
+if (!(elgg_get_plugin_setting('secondlastname_field', 'celebrations'))) {
+    elgg_set_plugin_setting('secondlastname_field', 'no', 'celebrations');
 }
-if (!(elgg_get_plugin_setting('celebrations_birthdate_field'))) {
-    elgg_set_plugin_setting('celebrations_birthdate_field', 'yes');
+if (!(elgg_get_plugin_setting('celebrations_birthdate_field', 'celebrations'))) {
+    elgg_set_plugin_setting('celebrations_birthdate_field', 'yes', 'celebrations');
 }
-if (!(elgg_get_plugin_setting('celebrations_dieday_field'))) {
-    elgg_set_plugin_setting('celebrations_dieday_field', 'no');
+if (!(elgg_get_plugin_setting('celebrations_dieday_field', 'celebrations'))) {
+    elgg_set_plugin_setting('celebrations_dieday_field', 'no', 'celebrations');
 }
-if (!(elgg_get_plugin_setting('celebrations_feastdate_field'))) {
-    elgg_set_plugin_setting('celebrations_feastdate_field', 'no');
+if (!(elgg_get_plugin_setting('celebrations_feastdate_field', 'celebrations'))) {
+    elgg_set_plugin_setting('celebrations_feastdate_field', 'no', 'celebrations');
 }
-if (!(elgg_get_plugin_setting('celebrations_weddingdate_field'))) {
-    elgg_set_plugin_setting('celebrations_weddingdate_field', 'no');
+if (!(elgg_get_plugin_setting('celebrations_weddingdate_field', 'celebrations'))) {
+    elgg_set_plugin_setting('celebrations_weddingdate_field', 'no', 'celebrations');
 }
 
 $form = '<label>' . elgg_echo("celebrations:replaceage") . '</label>';

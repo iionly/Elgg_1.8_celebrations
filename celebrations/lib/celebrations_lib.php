@@ -40,13 +40,19 @@ function printcelebrationsdate($type, $date) {
         if ($type == 1) {
             $transformdate = gmstrftime("%e/%m/%Y", $date);
         } else {
-            $transformdate = gmstrftime("%e %B %Y", $date);
+            $date_day = date('j', $date);
+            $date_month = date('n', $date);
+            $date_year = date('Y', $date);
+            $transformdate = $date_day . '. ' . elgg_echo("celebrations:month:$date_month") . ' ' . $date_year;
         }
     } else {
         if ($type == 1) {
-            $transformdate = gmstrftime("%m/%d/%Y", $date);
+            $transformdate = gmstrftime("%m/%e/%Y", $date);
         } else {
-            $transformdate = gmstrftime("%B %e, %Y", $date);
+            $date_day = date('j', $date);
+            $date_month = date('n', $date);
+            $date_year = date('Y', $date);
+            $transformdate = elgg_echo("celebrations:month:$date_month") . ' ' . $date_day . ', ' . $date_year;
         }
     }
 
@@ -54,9 +60,7 @@ function printcelebrationsdate($type, $date) {
 }
 
 // check if there are any celebrations within the next few days
-function checknextfewdays($fecha, $feast, $num, $type) {
-
-    global $month;
+function checknextfewdays($fecha, $feast, $num, $type, $month) {
 
     if ($fecha) {
         $celebration = convert_date($fecha, $feast);
@@ -92,28 +96,31 @@ function orderdate($x, $y) {
     }
 }
 
-function user_celebrations($num, $checkdaystype, $filter) {
+function user_celebrations($num, $checkdaystype, $filter, $month = null) {
 
-    global $CONFIG;
+    if(!$month) {
+        $$month = date("n");
+    }
 
     if (!$filter) {
         $filter = 0;
     }
     if($filter < 0) {
-        $users = get_user_friends(elgg_get_logged_in_user_entity()->guid, "", 1000000);
+        $users = get_user_friends(elgg_get_logged_in_user_guid(), null, false);
     } elseif ($filter >= 1) {
-        if (is_group_member($filter, elgg_get_logged_in_user_entity()->guid)) {
-            $users = get_group_members($filter, $limit=1000000, $offset=0, $site_guid=0, $count=false);
+        if (is_group_member($filter, elgg_get_logged_in_user_guid())) {
+            $users = get_group_members($filter, false);
         }
     } else {
-        $users = elgg_get_entities(array('type' => 'user', 'limit' => 0));
+        $users = elgg_get_entities(array('type' => 'user', 'limit' => false));
     }
 
     //check the profile fields for the prefix of the celebrations plugin. This let us to grow up easily the number of fields
     $celebrationfields = array();
-    $prefix = $CONFIG->profile_celebrations_prefix;
-    if (is_array($CONFIG->profile_fields) && sizeof($CONFIG->profile_fields) > 0) {
-        foreach($CONFIG->profile_fields as $shortname => $valtype) {
+    $prefix = elgg_get_config('profile_celebrations_prefix');
+    $profile_fields = elgg_get_config('profile_fields');
+    if (is_array($profile_fields) && sizeof($profile_fields) > 0) {
+        foreach($profile_fields as $shortname => $valtype) {
             $match = '/^'.$prefix.'.*$/';
             if (preg_match($match, $shortname)) {
                 $varcelebration = $shortname;
@@ -130,10 +137,10 @@ function user_celebrations($num, $checkdaystype, $filter) {
                 foreach($celebrationfields as $key => $valtype) {
                     $celebrationday = $user->$key;
                     $key = mb_substr($key, strlen($prefix), strlen($key));
-                    if (($valtype == 'day_anniversary') && ($rest = checknextfewdays($celebrationday, 0, $num, $checkdaystype))) {
+                    if (($valtype == 'day_anniversary') && ($rest = checknextfewdays($celebrationday, 0, $num, $checkdaystype, $month))) {
                         $rest = $rest-1;
                         $row[] = array('name' => $user->name, 'fullname' => $fullname, 'id' => $user->guid, 'type' => $key, 'date' => $celebrationday, 'url' => $user->getURL(), 'icon' => $user->getIconURL('topbar'), 'format' => $valtype, 'rest' => $rest);
-                    } elseif (($valtype == 'yearly') && ($rest = checknextfewdays($celebrationday, 1, $num, $checkdaystype))) {
+                    } elseif (($valtype == 'yearly') && ($rest = checknextfewdays($celebrationday, 1, $num, $checkdaystype, $month))) {
                         $rest = $rest-1;
                         list($dia, $mes) = explode("-", $celebrationday);
                         $feastday = strtotime(date("Y").'/'.$mes.'/'.$dia);
@@ -149,13 +156,13 @@ function user_celebrations($num, $checkdaystype, $filter) {
     return $row;
 }
 
-function filterlist($user_guid) {
+function filterlist($user_guid = null) {
 
-    $user_guid = $vars['user_guid'];
     if (!$user_guid) {
-        $user_guid = elgg_get_logged_in_user_entity()->guid;
-        $mygroups = get_users_membership($user_guid);
+        $user_guid = elgg_get_logged_in_user_guid();
     }
+    $user_entity = get_entity($user_guid);
+    $mygroups = get_users_membership($user_guid);
     $filteroptions = array();
     $filteroptions = array('0' => elgg_echo('celebrations:option_all'), '-1' => elgg_echo('celebrations:option_friends'));
     if(!empty($mygroups)) {

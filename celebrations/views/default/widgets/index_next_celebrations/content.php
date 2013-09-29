@@ -37,10 +37,10 @@ if (!empty($row_celebrations)) {
             echo "<tr bgcolor=\"#{$even_odd}\">";
 
             if ($val['rest'] == 0) {
-                if (($val['type'] == 'dieday') || ($val['id'] == elgg_get_logged_in_user_entity()->guid)) {
+                if (($val['type'] == 'dieday') || ($val['id'] == elgg_get_logged_in_user_guid())) {
                     $sendcelebrationsmessage = '';
                 } else {
-                     $sendcelebrationsmessage = '<a class="privatemessages" href="'.$CONFIG->wwwroot.'messages/compose?send_to='.$val['id'].'" >&nbsp;</a>';
+                     $sendcelebrationsmessage = '<a class="privatemessages" href="'.elgg_get_site_url().'messages/compose?send_to='.$val['id'].'" >&nbsp;</a>';
                 }
                 $daysleftshow = elgg_echo('next_celebrations:today');
             } else if ($val['rest'] == 1) {

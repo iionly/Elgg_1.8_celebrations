@@ -59,6 +59,7 @@ $english = array(
 'next_celebrations:dayleft' => "Tomorrow",
 'next_celebrations:celebrate' => " is ",
 'next_celebrations:in' => "In",
+'next_celebrations:in_title' => "in",
 'next_celebrations:genitive' => "'s ",
 
 // Form fields
@@ -66,18 +67,18 @@ $english = array(
 'today_celebrations:profile_feastdate_label' => "Date of anniversary celebration (dd/mm)",
 
 // Month names
-"month:1" => "January",
-"month:2" => "February",
-"month:3" => "March",
-"month:4" => "April",
-"month:5" => "May",
-"month:6" => "June",
-"month:7" => "July",
-"month:8" => "August",
-"month:9" => "September",
-"month:10" => "October",
-"month:11" => "November",
-"month:12" => "December"
+"celebrations:month:1" => "January",
+"celebrations:month:2" => "February",
+"celebrations:month:3" => "March",
+"celebrations:month:4" => "April",
+"celebrations:month:5" => "May",
+"celebrations:month:6" => "June",
+"celebrations:month:7" => "July",
+"celebrations:month:8" => "August",
+"celebrations:month:9" => "September",
+"celebrations:month:10" => "October",
+"celebrations:month:11" => "November",
+"celebrations:month:12" => "December"
 
 );
 add_translation("en",$english);

@@ -59,6 +59,7 @@ $german = array(
 'next_celebrations:dayleft' => "Morgen",
 'next_celebrations:celebrate' => " ist ",
 'next_celebrations:in' => "In",
+'next_celebrations:in_title' => "im",
 'next_celebrations:genitive' => "s ",
 
 // Form fields
@@ -66,18 +67,18 @@ $german = array(
 'today_celebrations:profile_feastdate_label' => "Tag des Feiertags (TT/MM)",
 
 // Month names
-"month:1" => "Januar",
-"month:2" => "Februar",
-"month:3" => "März",
-"month:4" => "April",
-"month:5" => "Mai",
-"month:6" => "Juni",
-"month:7" => "Juli",
-"month:8" => "August",
-"month:9" => "September",
-"month:10" => "Oktober",
-"month:11" => "November",
-"month:12" => "Dezember"
+"celebrations:month:1" => "Januar",
+"celebrations:month:2" => "Februar",
+"celebrations:month:3" => "März",
+"celebrations:month:4" => "April",
+"celebrations:month:5" => "Mai",
+"celebrations:month:6" => "Juni",
+"celebrations:month:7" => "Juli",
+"celebrations:month:8" => "August",
+"celebrations:month:9" => "September",
+"celebrations:month:10" => "Oktober",
+"celebrations:month:11" => "November",
+"celebrations:month:12" => "Dezember"
 
 );
 add_translation("de",$german);

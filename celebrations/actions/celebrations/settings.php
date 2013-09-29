@@ -6,11 +6,11 @@
  *
  * @package profile_manager
  * @author ColdTrick IT Solutions
- * @copyright Coldtrick IT Solutions 2009
+ * @copyright Coldtrick IT Solutions 2009-2013
  * @link http://www.coldtrick.com/
  *
  * adapted and modified for the celebrations plugin for Elgg 1.8 by iionly
- * (c) iionly 2012
+ * (c) iionly 2012-2013
  *
  */
 
@@ -23,7 +23,7 @@ if(!empty($params)) {
     foreach ($params as $k => $v) {
         if (!elgg_set_plugin_setting($k, $v, 'celebrations')) {
             register_error(sprintf(elgg_echo('plugins:settings:save:fail'), 'celebrations'));
-            forward($_SERVER['HTTP_REFERER']);
+            forward(REFERER);
         }
     }
 }

@@ -8,11 +8,11 @@
  * @subpackage input field
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Fernando Graells
- * @copyright Fernando Graells 2009
+ * @copyright Fernando Graells 2009-2013
  * @link
  *
  * for Elgg 1.8 by iionly
- * @copyright iionly 2012
+ * @copyright iionly 2012-2013
  * iionly@gmx.de
  *
  * @uses $vars['value'] The current value, if any
@@ -151,7 +151,7 @@ function stripLeadingZeroes(input) {
                 echo ' selected="selected"';
             }
 
-            echo '>' . elgg_echo("month:{$monthcount}") . '</option>' . chr(10);
+            echo '>' . elgg_echo("celebrations:month:{$monthcount}") . '</option>' . chr(10);
             $monthcount = $monthcount +1;
         }
     ?>
