@@ -1,9 +1,9 @@
 Celebrations plugin for Elgg 1.8
-Latest Version: 1.8.2
-Released: 2013-09-28
+Latest Version: 1.8.3
+Released: 2014-04-18
 Contact: iionly@gmx.de
 License: GNU General Public License version 2
-Copyright: (c) iionly 2012-2013, (C) Fernando Graells 2009-2013
+Copyright: (c) iionly 2012-2014, (C) Fernando Graells 2009-2014
 
 
 
@@ -40,6 +40,17 @@ If the Widget Manager plugin is enabled - and the Widget Manager plugin is confi
 
 
 Changelog:
+
+Changes for release 1.8.3 (by iionly)
+
+- getting the Celebrations plugin to fully work again on Elgg 1.8.19 (thanks to Brett for helping me to solve this issue),
+- calculation and display of celebrations accounts for local (server) time instead of expecting GMT/UTC (celebration dates entered on profile pages are always saved in GMT/UTC but if the timezone of the server is different this should now taken into account correctly),
+- date selection (number of days in a month) fixed for Special anniversaries,
+- site menu "Celebrations" entry only included for logged-in users,
+- layout fixes for listings of celebrations in widgets and on the "Our anniversary celebrations in..." page,
+- success system message when plugin settings saved correctly,
+- Spanish language file added (thanks to Joaquín Marín),
+- code cleanup.
 
 Changes for release 1.8.2 (by iionly)
 
